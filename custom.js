@@ -55,8 +55,7 @@ $.extend({
        headings[0].parentNode.insertBefore(h2,headings[0]);
        for(var i=0; i<headings.length; i++) {
          h2.appendChild(tabs[i]);
-         headings[i].setAttribute('origId', headings[i].id);
-       };
+       }
      },
      
      hide_all:function() {
@@ -72,10 +71,10 @@ $.extend({
        if(!section) var section = sections[index=0];
        $("#" + section.id).css("display","block");
        tabs[index].className = this.TAB_SELECTED_CLASS;
-       var id = headings[index].getAttribute('origId') || sections[index].getAttribute('id');
+       var id = sections[index].getAttribute('id');
        if(id && index != $.Tabs.lastSection) {
          if((location.hash == null || $.Tabs.lastSection != -1)) location.hash = '#' + id;
-       };
+       }
        $.Tabs.lastSection = index;
      },
      
@@ -91,15 +90,22 @@ $.extend({
      set_handlers:function() {
        for(var i=0; i<tabs.length; i++) {
          tabs[i].onclick = this.tab_click;
-       };
+       }
      },
      
      get_selected:function(){
        var selected = 0;
        if(location.hash) {
          selected = location.hash.substring(1);
-       };
-
+       }
+     if(isNaN(selected)){
+      for(var i=0; i<sections.length; i++){
+        if(sections[i].getAttribute('id') == selected || headings[i].getAttribute('origId') == selected){
+          selected = i;
+          break;
+        }
+      }
+    }
        return selected;
     },
   
