@@ -24,9 +24,9 @@ $.extend({
      lastSection: -1,
      checkHash:function() {
        var section = $.Tabs.get_selected();
-       if(section != this.lastSection) {
+       if(section != $.Tabs.lastSection) {
          $.Tabs.show_section(section);
-         this.lastSection = section;
+         $.Tabs.lastSection = section;
        }
      },
      find_elements:function() {
@@ -72,8 +72,11 @@ $.extend({
        if(!section) var section = sections[index=0];
        $("#" + section.id).css("display","block");
        tabs[index].className = this.TAB_SELECTED_CLASS;
-
-       this.lastSection = index;
+       var id = headings[index].getAttribute('origId') || sections[index].getAttribute('id');
+       if(id && index != $.Tabs.lastSection) {
+         if((location.hash == null || $.Tabs.lastSection != -1)) location.hash = '#' + id;
+       };
+       $.Tabs.lastSection = index;
      },
      
      tab_click:function(e) {
@@ -95,25 +98,8 @@ $.extend({
        var selected = 0;
        if(location.hash) {
          selected = location.hash.substring(1);
-       } else if(location.search) {
-         var args = location.search.substring(1).split('&');
-         for(var i=0; i<args.length; i++) {
-           var name = args[i].split('=')[0];
-           var value = args[i].split('=')[1];
-           if(name == QUERY_SECTION_ARG){
-               selected = value;
-               break;
-           }
-         }
-       }
-       if(isNaN(selected)){
-         for(var i=0; i<sections.length; i++){
-           if(sections[i].getAttribute('id') == selected || headings[i].getAttribute('origId') == selected){
-             selected = i;
-             break;
-           }
-         }
-       }
+       };
+
        return selected;
     },
   
