@@ -12,7 +12,7 @@
 */
 
 h2.tab {
-  height: 19px;
+  height: 17px;
 }
 
 h2.tab div {
@@ -34,14 +34,13 @@ h2.tab div {
 }
 
 h2.tab div.not-selected {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
+  background-color: transparent;
   color: #999;
 }
 
 h2.tab div.selected {
   background-color: #fff;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 h2.tab {
@@ -54,6 +53,6 @@ h2.tab {
 
 div.section {
   border-top: 1px solid #ccc;
-  padding: 15px 5px 5px 5px;
+  padding: 17px 5px 5px 5px;
   margin-top: 0;
 }
