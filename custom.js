@@ -50,7 +50,7 @@ $.extend({
       
      combine_elements:function() {
        if(headings.length == 0)return;
-       var h2 = document.createElement("h2");
+       var h2 = document.createElement(this.TAB_HEADINGS);
        h2.setAttribute('class', headings[0].className + ' ' + "tabholder");
        headings[0].parentNode.insertBefore(h2,headings[0]);
        for(var i=0; i<headings.length; i++) {
@@ -113,7 +113,7 @@ $.extend({
        clearInterval(interval);
        $("div." + this.SECTION_CLASS).css("display","block");
        $(this.TAB_HEADINGS + '.' + this.TAB_CLASS).css("display","block");
-       $("h2.tabholder").remove();
+       $(this.TAB_HEADINGS + ".tabholder").remove();
      },
      
      turn_tabs_on:function() {
